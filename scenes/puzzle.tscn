@@ -1,0 +1,154 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/puzzle.gd" id="1"]
+
+[sub_resource type="StyleBoxFlat" id="Board"]
+bg_color = Color(0.12, 0.165, 0.255, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.35, 0.42, 0.58, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="Complete"]
+bg_color = Color(0.075, 0.106, 0.176, 0.97)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.992, 0.553, 0.235, 1)
+corner_radius_top_left = 28
+corner_radius_top_right = 28
+corner_radius_bottom_right = 28
+corner_radius_bottom_left = 28
+
+[sub_resource type="StyleBoxFlat" id="ActionButton"]
+bg_color = Color(0.992, 0.553, 0.235, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+content_margin_left = 24.0
+content_margin_top = 12.0
+content_margin_right = 24.0
+content_margin_bottom = 12.0
+
+[node name="Puzzle" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+
+[node name="Board" type="Panel" parent="."]
+offset_left = 437.0
+offset_top = 147.0
+offset_right = 843.0
+offset_bottom = 553.0
+theme_override_styles/panel = SubResource("Board")
+
+[node name="TopBar" type="HBoxContainer" parent="."]
+offset_left = 48.0
+offset_top = 35.0
+offset_right = 1232.0
+offset_bottom = 95.0
+theme_override_constants/separation = 20
+
+[node name="BackButton" type="Button" parent="TopBar"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "← Acasă"
+
+[node name="Title" type="Label" parent="TopBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.88, 0.55, 1)
+theme_override_font_sizes/font_size = 32
+text = "Puzzle 3 × 3"
+horizontal_alignment = 1
+
+[node name="ProgressLabel" type="Label" parent="TopBar"]
+custom_minimum_size = Vector2(145, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "0 / 9 piese"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RestartButton" type="Button" parent="TopBar"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Reîncepe"
+
+[node name="Hint" type="Label" parent="."]
+offset_left = 40.0
+offset_top = 660.0
+offset_right = 1240.0
+offset_bottom = 700.0
+theme_override_colors/font_color = Color(0.65, 0.72, 0.84, 1)
+theme_override_font_sizes/font_size = 19
+text = "Trage fiecare piesă în zona centrală"
+horizontal_alignment = 1
+
+[node name="PiecesLayer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CompletionPanel" type="PanelContainer" parent="."]
+visible = false
+offset_left = 390.0
+offset_top = 170.0
+offset_right = 890.0
+offset_bottom = 550.0
+theme_override_styles/panel = SubResource("Complete")
+
+[node name="Center" type="CenterContainer" parent="CompletionPanel"]
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="CompletionPanel/Center"]
+layout_mode = 2
+theme_override_constants/separation = 18
+alignment = 1
+
+[node name="Celebration" type="Label" parent="CompletionPanel/Center/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 62
+text = "🎉 ⭐ 🎉"
+horizontal_alignment = 1
+
+[node name="Title" type="Label" parent="CompletionPanel/Center/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.88, 0.55, 1)
+theme_override_font_sizes/font_size = 42
+text = "Bravo!"
+horizontal_alignment = 1
+
+[node name="Message" type="Label" parent="CompletionPanel/Center/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Ai terminat primul puzzle."
+horizontal_alignment = 1
+
+[node name="ReplayButton" type="Button" parent="CompletionPanel/Center/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("ActionButton")
+theme_override_styles/hover = SubResource("ActionButton")
+theme_override_styles/pressed = SubResource("ActionButton")
+text = "Joacă din nou"
+
+[node name="HomeButton" type="Button" parent="CompletionPanel/Center/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Înapoi acasă"
